@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -8,51 +9,61 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:text="I Miei Allenamenti"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"/>
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/btnAddExercise"
-        android:text="Aggiungi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="Aggiungi" />
 
-    <ListView
-        android:id="@+id/lvExercises"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tvTitle"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="60dp" />
-
+    <!-- Barra dei pulsanti ancorata in basso -->
     <LinearLayout
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:paddingTop="8dp">
 
         <Button
             android:id="@+id/btnStartWorkout"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Inizia Allenamento" />
+            android:layout_weight="1.5"
+            android:text="Inizia" />
 
         <Button
             android:id="@+id/btnShare"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
             android:text="Condividi" />
 
         <Button
             android:id="@+id/btnGuide"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
             android:text="Guida" />
-
     </LinearLayout>
+
+    <!-- La lista occupa tutto lo spazio tra il titolo e la barra inferiore -->
+    <ListView
+        android:id="@+id/lvExercises"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomBar"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
 
 </RelativeLayout>
