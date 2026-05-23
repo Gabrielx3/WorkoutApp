@@ -1,34 +1,30 @@
 package com.example.workoutapp.utils;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
-
-import com.example.workoutapp.R;
+import androidx.core.app.NotificationCompat;
 
 public class NotificationHelper {
-    public static final String CHANNEL_ID = "workout_channel";
+    public static final String ID_CANALE = "CanaleTimer";
 
-    public static void creaCanale(Context c) {
+    // Crea il canale (necessario da Android 8 in su)
+    public static void creaCanaleNotifica(Context contesto) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    CHANNEL_ID,
-                    "Workout Notifications",
-                    NotificationManager.IMPORTANCE_DEFAULT
-            );
-            NotificationManager manager = c.getSystemService(NotificationManager.class);
-            if (manager != null) {
-                manager.createNotificationChannel(channel);
-            }
+            NotificationChannel canale = new NotificationChannel(
+                    ID_CANALE, "Timer di Recupero", NotificationManager.IMPORTANCE_LOW);
+            NotificationManager manager = contesto.getSystemService(NotificationManager.class);
+            if (manager != null) manager.createNotificationChannel(canale);
         }
     }
 
-    public static Notification.Builder getNotifica(Context c, String testo) {
-        return new Notification.Builder(c, CHANNEL_ID)
-                .setContentTitle("Workout")
+    // Costruisce la notifica che l'utente vedrà
+    public static NotificationCompat.Builder ottieniCostruttore(Context contesto, String testo) {
+        return new NotificationCompat.Builder(contesto, ID_CANALE)
+                .setContentTitle("Recupero in corso")
                 .setContentText(testo)
-                .setSmallIcon(R.mipmap.ic_launcher);
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setOngoing(true); // Impedisce all'utente di cancellarla col dito
     }
 }
