@@ -19,6 +19,6 @@ public class Exercise implements Serializable {private String nome;
 
     @Override
     public String toString() {
-        return nome + " (" + serie + "x" + ripetizioni + ")";
+        return nome +  + serie + "x" + ripetizioni;
     }
 }
