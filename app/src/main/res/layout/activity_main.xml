@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Layout "relative" ovvero basato su relazione tra gli elementi che contiene -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
-
+    <!-- titolo -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
@@ -15,15 +16,19 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
+
+    <!-- bottoni per aggiungere gli allenamenti -->
     <Button
         android:id="@+id/btnAddExercise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignTop="@id/tvTitle"
-        android:text="Aggiungi" />
-
-    <!-- Barra dei pulsanti ancorata in basso -->
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-6dp"
+        android:layout_marginEnd="21dp"
+        android:text="Aggiungi"
+        />
+    <!-- Barra dei pulsanti ancorata in basso  orizzontale-->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
@@ -32,16 +37,17 @@
         android:orientation="horizontal"
         android:paddingTop="8dp">
 
+        <!-- 3 pulsanti contenuti nel layout lineare -->
         <Button
             android:id="@+id/btnStartWorkout"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
             android:text="Inizia" />
 
         <Button
             android:id="@+id/btnShare"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
@@ -49,14 +55,14 @@
 
         <Button
             android:id="@+id/btnGuide"
-            android:layout_width="0dp"
+            android:layout_width="59dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:text="Guida" />
     </LinearLayout>
 
-    <!-- La lista occupa tutto lo spazio tra il titolo e la barra inferiore -->
+    <!-- lista scorrevole che mostra tutti gli allenamenti aggiunti -->
     <ListView
         android:id="@+id/lvExercises"
         android:layout_width="match_parent"
