@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Casella Nome -->
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nome_esercizio" />
+
+    <!-- Casella Serie -->
+    <EditText
+        android:id="@+id/etSets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/serie"
+        android:inputType="number" />
+
+    <!-- Casella Ripetizioni -->
+    <EditText
+        android:id="@+id/etReps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ripetizioni"
+        android:inputType="number" />
+
+    <!-- Casella Recupero -->
+    <EditText
+        android:id="@+id/etRecovery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/recupero"
+        android:inputType="number" />
+
+    <!-- Pulsante Salva -->
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/salva"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>
