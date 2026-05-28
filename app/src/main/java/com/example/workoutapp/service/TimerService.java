@@ -1,6 +1,7 @@
 package com.example.workoutapp.service;
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.*;
@@ -22,6 +23,11 @@ public class TimerService extends Service {
             public void onTick(long millis) {
                 int rimanenti = (int) (millis / 1000);
                 // Invia i secondi rimanenti all'Activity per aggiornare lo schermo
+                NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                if (manager != null) {
+                    manager.notify(1, NotificationHelper.ottieniCostruttore(TimerService.this, "Mancano " + rimanenti + " secondi").build());
+                }
+
                 Intent intentTick = new Intent(AZIONE_TIMER);
                 intentTick.putExtra("secondi", rimanenti);
                 sendBroadcast(intentTick);
@@ -31,7 +37,15 @@ public class TimerService extends Service {
             public void onFinish() {
                 // Vibrazione finale
                 Vibrator v = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-                if (v != null) v.vibrate(500);
+                if (v != null){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                    } else {
+                        v.vibrate(500);
+                    }
+                }
+                NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                if (manager != null) manager.cancel(1);
                 stopSelf(); // Ferma il servizio
             }
         }.start();

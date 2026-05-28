@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +25,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddExerciseActivity" />
+    <activity android:name=".activity.SettingsActivity" />
+
+    <service
+        android:name=".service.TimerService"
+        android:foregroundServiceType="specialUse"
+        android:exported="false" />
+
+
     </application>
 
-</manifest>
+    </manifest>

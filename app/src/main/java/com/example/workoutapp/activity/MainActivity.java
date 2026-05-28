@@ -72,4 +72,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private final android.content.BroadcastReceiver timerReceiver = new android.content.BroadcastReceiver() {
+        @Override
+        public void onReceive(android.content.Context context, Intent intent) {
+            if (com.example.workoutapp.service.TimerService.AZIONE_TIMER.equals(intent.getAction())) {
+                int secondi = intent.getIntExtra("secondi", 0);
+                if (tvTimerCountdown != null) {
+                    tvTimerCountdown.setText("Recupero: " + secondi + "s");
+                    if (secondi == 0) {
+                        tvTimerCountdown.setVisibility(android.view.View.GONE);
+                    }
+                }
+            }
+        }
+    };
+
 }
