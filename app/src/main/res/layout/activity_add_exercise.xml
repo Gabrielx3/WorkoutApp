@@ -11,7 +11,9 @@
         android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nome_esercizio" />
+        android:hint="@string/nome_esercizio"
+        android:fontFamily="cursive"
+        android:textSize="23sp"/>
 
     <!-- Casella Serie -->
     <EditText
@@ -19,7 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/serie"
-        android:inputType="number" />
+        android:inputType="number"
+        android:fontFamily="cursive"
+        android:textSize="23sp"/>
 
     <!-- Casella Ripetizioni -->
     <EditText
@@ -27,7 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/ripetizioni"
-        android:inputType="number" />
+        android:inputType="number"
+        android:fontFamily="cursive"
+        android:textSize="23sp"/>
 
     <!-- Casella Recupero -->
     <EditText
@@ -35,7 +41,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/recupero"
-        android:inputType="number" />
+        android:inputType="number"
+        android:fontFamily="cursive"
+        android:textSize="23sp"/>
 
     <!-- Pulsante Salva -->
     <Button
