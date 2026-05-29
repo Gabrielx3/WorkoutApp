@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#FFEC">
+    android:background="@color/yellow_bg">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -13,22 +13,23 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="I Miei Allenamenti"
-        android:textSize="24sp"
+        android:textSize="36sp"
         android:textStyle="bold"
-        android:fontFamily="cursive"/>
+        android:fontFamily="cursive"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/btnAddExercise"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignTop="@id/tvTitle"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="-6dp"
         android:text="Aggiungi"
-        android:backgroundTint="#D7263D"
-        android:textColor="#000000"
+        android:backgroundTint="@color/red_primary"
+        android:textColor="@color/black"
         android:fontFamily="cursive"
-        android:textSize="16sp"/>
+        android:textSize="22sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvTimerCountdown"
@@ -37,8 +38,8 @@
         android:layout_below="@id/tvTitle"
         android:layout_centerHorizontal="true"
         android:text="Recupero: --"
-        android:textSize="22sp"
-        android:textColor="#D7263D"
+        android:textSize="28sp"
+        android:textColor="@color/red_primary"
         android:fontFamily="cursive"
         android:visibility="gone"
         android:layout_marginTop="10dp"/>
@@ -49,58 +50,63 @@
         android:layout_height="match_parent"
         android:layout_above="@id/bottomBar"
         android:layout_below="@id/tvTimerCountdown"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="7dp"/>
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:paddingTop="8dp">
 
         <Button
             android:id="@+id/btnStartWorkout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
             android:text="Inizia"
-            android:backgroundTint="#D7263D"
-            android:textColor="#000000"
-            android:fontFamily="cursive"/>
+            android:backgroundTint="@color/red_primary"
+            android:textColor="@color/black"
+            android:fontFamily="cursive"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/btnShare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
-            android:text="Condividi"
-            android:backgroundTint="#CED4DA"
-            android:textColor="#000000"
-            android:fontFamily="cursive"/>
+            android:text="Social"
+            android:backgroundTint="@color/grey_accent"
+            android:textColor="@color/black"
+            android:fontFamily="cursive"
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btnGuide"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
             android:text="Guida"
-            android:backgroundTint="#CED4DA"
-            android:textColor="#000000"
-            android:fontFamily="cursive"/>
+            android:backgroundTint="@color/grey_accent"
+            android:textColor="@color/black"
+            android:fontFamily="cursive"
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btnSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="4dp"
             android:layout_weight="1"
             android:text="Profilo"
-            android:backgroundTint="#CED4DA"
-            android:textColor="#000000"
-            android:fontFamily="cursive"/>
+            android:backgroundTint="@color/grey_accent"
+            android:textColor="@color/black"
+            android:fontFamily="cursive"
+            android:textSize="16sp"/>
     </LinearLayout>
 </RelativeLayout>
