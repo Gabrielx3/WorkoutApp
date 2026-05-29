@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Layout "relative" ovvero basato su relazione tra gli elementi che contiene -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#FFEC"
-    >
+    android:background="#FFEC">
 
-    <!-- titolo -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
@@ -16,12 +13,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="I Miei Allenamenti"
-        android:textSize="29sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:fontFamily="cursive"/>
 
-
-    <!-- bottoni per aggiungere gli allenamenti -->
     <Button
         android:id="@+id/btnAddExercise"
         android:layout_width="wrap_content"
@@ -29,74 +24,83 @@
         android:layout_alignTop="@id/tvTitle"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="-6dp"
-        android:layout_marginEnd="21dp"
         android:text="Aggiungi"
         android:backgroundTint="#D7263D"
         android:textColor="#000000"
         android:fontFamily="cursive"
-        android:textSize="19sp"
-        />
-    <!-- Barra dei pulsanti ancorata in basso  orizzontale-->
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvTimerCountdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:layout_centerHorizontal="true"
+        android:text="Recupero: --"
+        android:textSize="22sp"
+        android:textColor="#D7263D"
+        android:fontFamily="cursive"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"/>
+
+    <ListView
+        android:id="@+id/lvExercises"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomBar"
+        android:layout_below="@id/tvTimerCountdown"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="7dp"/>
+
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:paddingTop="8dp"
-        >
+        android:paddingTop="8dp">
 
-        <!-- 3 pulsanti contenuti nel layout lineare -->
         <Button
             android:id="@+id/btnStartWorkout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
             android:text="Inizia"
             android:backgroundTint="#D7263D"
             android:textColor="#000000"
-            android:fontFamily="cursive"
-            android:textSize="19sp"
-            />
+            android:fontFamily="cursive"/>
 
         <Button
             android:id="@+id/btnShare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
             android:text="Condividi"
             android:backgroundTint="#CED4DA"
             android:textColor="#000000"
-            android:fontFamily="cursive"
-            android:textSize="19sp"
-            />
+            android:fontFamily="cursive"/>
 
         <Button
             android:id="@+id/btnGuide"
-            android:layout_width="59dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
             android:text="Guida"
             android:backgroundTint="#CED4DA"
             android:textColor="#000000"
-            android:fontFamily="cursive"
-            android:textSize="18sp"
-            />
+            android:fontFamily="cursive"/>
+
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:text="Profilo"
+            android:backgroundTint="#CED4DA"
+            android:textColor="#000000"
+            android:fontFamily="cursive"/>
     </LinearLayout>
-
-    <!-- lista scorrevole che mostra tutti gli allenamenti aggiunti -->
-    <ListView
-        android:id="@+id/lvExercises"
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottomBar"
-        android:layout_below="@id/tvTitle"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="7dp"
-
-        />
-
 </RelativeLayout>

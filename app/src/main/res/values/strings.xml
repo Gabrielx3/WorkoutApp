@@ -5,4 +5,10 @@
     <string name="ripetizioni">Ripetizioni (es. 10)</string>
     <string name="recupero">Recupero (secondi)</string>
     <string name="salva">Salva Esercizio</string>
+
+    <!-- Impostazioni -->
+    <string name="titolo_impostazioni">Impostazioni Profilo</string>
+    <string name="label_username">Nome Utente:</string>
+    <string name="hint_username">Inserisci il tuo nome</string>
+    <string name="btn_salva_preferenze">Salva Preferenze</string>
 </resources>
