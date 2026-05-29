@@ -21,7 +21,7 @@ import com.example.workoutapp.utils.DataManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    // --- COMPONENTI UI (Iniziali + Nuovi aggiunti da Persona 2) ---
+
     private Button btnAddExercise, btnStartWorkout, btnShare, btnGuide, btnSettings;
     private ListView lvExercises;
     private TextView tvTitle;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // --- INIZIALIZZAZIONE COMPONENTI UI (Persona 2) ---
+
         tvTitle = findViewById(R.id.tvTitle);
         btnAddExercise = findViewById(R.id.btnAddExercise);
         btnStartWorkout = findViewById(R.id.btnStartWorkout);
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         lvExercises = findViewById(R.id.lvExercises);
         tvTimerCountdown = findViewById(R.id.tvTimerCountdown); // Nuova TextView per Service
 
-        // Navigazione esplicita verso la schermata di inserimento (Activity 2)
+
         btnAddExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Selezione dell'esercizio dalla lista (Persona 2)
+
         lvExercises.setOnItemClickListener((parent, view, position, id) -> {
             selectedPosition = position;
             Toast.makeText(MainActivity.this, "Selezionato: " + exerciseList.get(position).getNome(), Toast.LENGTH_SHORT).show();
         });
 
-        // REQUISITO 3.2 - AVVIO FOREGROUND SERVICE CON DATI (Persona 2)
+
         btnStartWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // REQUISITO 3.4 - INTENT IMPLICITO 1: Condivisione Testuale (Persona 2)
+
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // REQUISITO 3.4 - INTENT IMPLICITO 2: Browser Web Esterno (Persona 2)
+
         btnGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // REQUISITO 3.1 - NAVIGAZIONE VERSO TERZA ACTIVITY CON EXTRA (Persona 2)
+
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,23 +127,23 @@ public class MainActivity extends AppCompatActivity {
         // [Nota per il team: qui Persona 3 inserirà la chiamata per creare il canale di notifica e i permessi runtime]
     }
 
-    // --- AGGIORNAMENTO DINAMICO UI (Condiviso/Persona 2) ---
+
     @Override
     protected void onResume() {
         super.onResume();
-        // Aggiorna il titolo personalizzato con il nome salvato nelle SharedPreferences (Persona 1)
+
         String username = DataManager.loadUsername(this);
         if (tvTitle != null) {
             tvTitle.setText("Allenamenti di " + username);
         }
 
-        // Ricarica la lista dal file JSON dell'Internal Storage (Persona 1)
+
         exerciseList = DataManager.loadExercises(this);
         adapter = new ExerciseAdapter(this, exerciseList);
         lvExercises.setAdapter(adapter);
     }
 
-    // --- LOGICA DI SISTEMA PER IL TIMER (Mantenuta dall'originale, di competenza di Persona 3) ---
+
     private final android.content.BroadcastReceiver timerReceiver = new android.content.BroadcastReceiver() {
         @Override
         public void onReceive(android.content.Context context, Intent intent) {
