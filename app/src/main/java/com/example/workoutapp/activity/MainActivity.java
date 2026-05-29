@@ -1,6 +1,10 @@
 package com.example.workoutapp.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.BroadcastReceiver;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -21,16 +27,29 @@ import com.example.workoutapp.utils.DataManager;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private Button btnAddExercise, btnStartWorkout, btnShare, btnGuide, btnSettings;
     private ListView lvExercises;
     private TextView tvTitle;
-    private TextView tvTimerCountdown; // Gestito nella UI da Persona 2, aggiornato dal receiver di Persona 3
+    private TextView tvTimerCountdown;
 
-    // --- VARIABILI DATI (Gestite da Persona 2) ---
     private ExerciseAdapter adapter;
     private java.util.List<com.example.workoutapp.model.Exercise> exerciseList;
     private int selectedPosition = -1;
+
+    private final BroadcastReceiver timerReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (com.example.workoutapp.service.TimerService.AZIONE_TIMER.equals(intent.getAction())) {
+                int secondi = intent.getIntExtra("secondi", 0);
+                if (tvTimerCountdown != null) {
+                    tvTimerCountdown.setText("Recupero: " + secondi + "s");
+                    if (secondi == 0) {
+                        tvTimerCountdown.setVisibility(View.GONE);
+                    }
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +63,14 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-
         tvTitle = findViewById(R.id.tvTitle);
         btnAddExercise = findViewById(R.id.btnAddExercise);
         btnStartWorkout = findViewById(R.id.btnStartWorkout);
         btnShare = findViewById(R.id.btnShare);
         btnGuide = findViewById(R.id.btnGuide);
-        btnSettings = findViewById(R.id.btnSettings); // Nuovo bottone per Terza Activity
+        btnSettings = findViewById(R.id.btnSettings);
         lvExercises = findViewById(R.id.lvExercises);
-        tvTimerCountdown = findViewById(R.id.tvTimerCountdown); // Nuova TextView per Service
-
+        tvTimerCountdown = findViewById(R.id.tvTimerCountdown);
 
         btnAddExercise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,12 +80,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         lvExercises.setOnItemClickListener((parent, view, position, id) -> {
             selectedPosition = position;
             Toast.makeText(MainActivity.this, "Selezionato: " + exerciseList.get(position).getNome(), Toast.LENGTH_SHORT).show();
         });
-
 
         btnStartWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Seleziona un esercizio dalla lista!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // Recupera il tempo di recupero dell'esercizio selezionato
                 int recupero = exerciseList.get(selectedPosition).getSecondiRecupero();
 
                 Intent serviceIntent = new Intent(MainActivity.this, com.example.workoutapp.service.TimerService.class);
@@ -92,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         btnGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,51 +125,53 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                // Passaggio dati nativo extra (Nome Utente caricato tramite DataManager di Persona 1)
                 intent.putExtra("attuale_nome", DataManager.loadUsername(MainActivity.this));
                 startActivity(intent);
             }
         });
 
-        // [Nota per il team: qui Persona 3 inserirà la chiamata per creare il canale di notifica e i permessi runtime]
-    }
+        com.example.workoutapp.utils.NotificationHelper.creaCanaleNotifica(this);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 101);
+            }
+        }
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         String username = DataManager.loadUsername(this);
         if (tvTitle != null) {
             tvTitle.setText("Allenamenti di " + username);
         }
-
 
         exerciseList = DataManager.loadExercises(this);
         adapter = new ExerciseAdapter(this, exerciseList);
         lvExercises.setAdapter(adapter);
     }
 
-
-    private final android.content.BroadcastReceiver timerReceiver = new android.content.BroadcastReceiver() {
-        @Override
-        public void onReceive(android.content.Context context, Intent intent) {
-            if (com.example.workoutapp.service.TimerService.AZIONE_TIMER.equals(intent.getAction())) {
-                int secondi = intent.getIntExtra("secondi", 0);
-                if (tvTimerCountdown != null) {
-                    tvTimerCountdown.setText("Recupero: " + secondi + "s");
-                    if (secondi == 0) {
-                        tvTimerCountdown.setVisibility(View.GONE);
-                    }
-                }
-            }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter filter = new IntentFilter(com.example.workoutapp.service.TimerService.AZIONE_TIMER);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(timerReceiver, filter, Context.RECEIVER_EXPORTED);
+        } else {
+            registerReceiver(timerReceiver, filter);
         }
-    };
+    }
 
-    // [Nota per il team: qui sotto Persona 3 implementerà onStart() e onStop() per registrare/disattivare il timerReceiver]
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(timerReceiver);
+    }
 }
