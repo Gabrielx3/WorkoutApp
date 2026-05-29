@@ -20,7 +20,6 @@ public class SettingsActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         btnSaveSettings = findViewById(R.id.btnSaveSettings);
 
-
         String nomeAttuale = getIntent().getStringExtra("attuale_nome");
         if (nomeAttuale != null) {
             etUsername.setText(nomeAttuale);
@@ -29,11 +28,12 @@ public class SettingsActivity extends AppCompatActivity {
         btnSaveSettings.setOnClickListener(v -> {
             String nuovoNome = etUsername.getText().toString().trim();
             if (!nuovoNome.isEmpty()) {
-                DataManager.saveUsername(SettingsActivity.this, nuevoNome);
+                DataManager.saveUsername(SettingsActivity.this, nuovoNome);
                 Toast.makeText(SettingsActivity.this, "Profilo aggiornato!", Toast.LENGTH_SHORT).show();
                 finish();
+            } else {
+                Toast.makeText(SettingsActivity.this, "Inserisci un nome valido", Toast.LENGTH_SHORT).show();
             }
         });
     }
 }
-

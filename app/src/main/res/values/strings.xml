@@ -1,14 +1,12 @@
 <resources>
     <string name="app_name">WorkoutApp</string>
-    <string name="nome_esercizio">Nome Esercizio</string>
-    <string name="serie">Serie (es. 3)</string>
-    <string name="ripetizioni">Ripetizioni (es. 10)</string>
-    <string name="recupero">Recupero (secondi)</string>
-    <string name="salva">Salva Esercizio</string>
-
-    <!-- Impostazioni -->
-    <string name="titolo_impostazioni">Impostazioni Profilo</string>
-    <string name="label_username">Nome Utente:</string>
+    <string name="nome_esercizio">Nome esercizio</string>
+    <string name="serie">Numero serie</string>
+    <string name="ripetizioni">Numero ripetizioni</string>
+    <string name="recupero">Secondi di recupero</string>
+    <string name="salva">Salva</string>
+    <string name="titolo_impostazioni">Impostazioni</string>
+    <string name="label_username">Username</string>
     <string name="hint_username">Inserisci il tuo nome</string>
-    <string name="btn_salva_preferenze">Salva Preferenze</string>
+    <string name="btn_salva_preferenze">Salva preferenze</string>
 </resources>

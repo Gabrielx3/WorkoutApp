@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         IntentFilter filter = new IntentFilter(com.example.workoutapp.service.TimerService.AZIONE_TIMER);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerReceiver(timerReceiver, filter, Context.RECEIVER_EXPORTED);
         } else {
             registerReceiver(timerReceiver, filter);

@@ -1,7 +1,8 @@
 package com.example.workoutapp.model;
 import java.io.Serializable;
 
-public class Exercise implements Serializable {private String nome;
+public class Exercise implements Serializable {
+    private String nome;
     private int serie, ripetizioni, secondiRecupero;
 
     public Exercise(String nome, int serie, int ripetizioni, int secondiRecupero) {
@@ -11,7 +12,6 @@ public class Exercise implements Serializable {private String nome;
         this.secondiRecupero = secondiRecupero;
     }
 
-    // Metodi per leggere i dati
     public String getNome() { return nome; }
     public int getSerie() { return serie; }
     public int getRipetizioni() { return ripetizioni; }
@@ -19,6 +19,6 @@ public class Exercise implements Serializable {private String nome;
 
     @Override
     public String toString() {
-        return nome +  + serie + "x" + ripetizioni;
+        return nome + " - " + serie + "x" + ripetizioni + " (Recupero: " + secondiRecupero + "s)";
     }
 }
